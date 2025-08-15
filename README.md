@@ -4,7 +4,6 @@ A beautiful, interactive dice rolling application built with vanilla HTML, CSS, 
 
 ![Dice Roller Demo](https://img.shields.io/badge/Status-Ready-brightgreen)
 ![Docker](https://img.shields.io/badge/Docker-Supported-blue)
-![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ## ✨ Features
 
@@ -150,10 +149,6 @@ docker push your-registry/dice-roller:latest
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## 🎯 Roadmap
 
