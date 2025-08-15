@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎲 Dice Roller 🎲</h1>
+        
+        <div class="dice-controls">
+            <div class="dice-type">
+                <label for="d2">D2</label>
+                <input type="number" id="d2" min="0" max="50" value="0">
+            </div>
+            <div class="dice-type">
+                <label for="d4">D4</label>
+                <input type="number" id="d4" min="0" max="50" value="0">
+            </div>
+            <div class="dice-type">
+                <label for="d6">D6</label>
+                <input type="number" id="d6" min="0" max="50" value="2">
+            </div>
+            <div class="dice-type">
+                <label for="d8">D8</label>
+                <input type="number" id="d8" min="0" max="50" value="0">
+            </div>
+            <div class="dice-type">
+                <label for="d10">D10</label>
+                <input type="number" id="d10" min="0" max="50" value="0">
+            </div>
+            <div class="dice-type">
+                <label for="d12">D12</label>
+                <input type="number" id="d12" min="0" max="50" value="0">
+            </div>
+            <div class="dice-type">
+                <label for="d20">D20</label>
+                <input type="number" id="d20" min="0" max="50" value="1">
+            </div>
+            <div class="dice-type">
+                <label for="d100">D100</label>
+                <input type="number" id="d100" min="0" max="50" value="0">
+            </div>
+        </div>
+
+        <button class="roll-button" onclick="rollAllDice()">🎲 Roll Dice! 🎲</button>
+
+        <div id="results" class="results"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
