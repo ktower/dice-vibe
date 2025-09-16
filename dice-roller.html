@@ -46,11 +46,12 @@
         </div>
 
         <div class="roll-controls">
-            <button class="roll-button" onclick="rollAllDice()">🎲 Roll Dice! 🎲</button>
+            <button class="roll-button" aria-label="Roll all selected dice">🎲 Roll Dice! 🎲</button>
             <label class="grand-total-toggle">
-                <input type="checkbox" id="show-grand-total" checked>
+                <input type="checkbox" id="show-grand-total" checked aria-describedby="grand-total-help">
                 <span class="checkmark"></span>
                 Show Grand Total
+                <span id="grand-total-help" class="sr-only">When checked, displays the sum of all dice rolled</span>
             </label>
         </div>
 
@@ -58,28 +59,28 @@
     </div>
 
     <!-- History Toggle Button -->
-    <button id="history-toggle-btn" class="history-toggle-btn" onclick="toggleHistory()">
+    <button id="history-toggle-btn" class="history-toggle-btn" aria-label="Open roll history" aria-expanded="false">
         📜
     </button>
 
     <!-- History Sidebar -->
-    <div id="history-sidebar" class="history-sidebar">
+    <div id="history-sidebar" class="history-sidebar" role="dialog" aria-labelledby="history-title" aria-modal="false">
         <div class="history-header">
-            <h2>📜 Roll History</h2>
+            <h2 id="history-title">📜 Roll History</h2>
             <div class="history-controls">
-                <button class="clear-history-btn" onclick="clearHistory(event)">Clear</button>
-                <button class="close-sidebar-btn" onclick="toggleHistory()">✕</button>
+                <button class="clear-history-btn" aria-label="Clear all roll history">Clear</button>
+                <button class="close-sidebar-btn" aria-label="Close history sidebar">✕</button>
             </div>
         </div>
         <div class="history-content">
-            <div id="history-list" class="history-list">
+            <div id="history-list" class="history-list" aria-live="polite">
                 <p class="no-history">No rolls yet. Start rolling to see your history!</p>
             </div>
         </div>
     </div>
 
     <!-- Overlay for mobile -->
-    <div id="history-overlay" class="history-overlay" onclick="toggleHistory()"></div>
+    <div id="history-overlay" class="history-overlay" aria-hidden="true"></div>
 
     <script src="script.js"></script>
 </body>
