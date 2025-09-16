@@ -45,10 +45,41 @@
             </div>
         </div>
 
-        <button class="roll-button" onclick="rollAllDice()">🎲 Roll Dice! 🎲</button>
+        <div class="roll-controls">
+            <button class="roll-button" onclick="rollAllDice()">🎲 Roll Dice! 🎲</button>
+            <label class="grand-total-toggle">
+                <input type="checkbox" id="show-grand-total" checked>
+                <span class="checkmark"></span>
+                Show Grand Total
+            </label>
+        </div>
 
         <div id="results" class="results"></div>
     </div>
+
+    <!-- History Toggle Button -->
+    <button id="history-toggle-btn" class="history-toggle-btn" onclick="toggleHistory()">
+        📜
+    </button>
+
+    <!-- History Sidebar -->
+    <div id="history-sidebar" class="history-sidebar">
+        <div class="history-header">
+            <h2>📜 Roll History</h2>
+            <div class="history-controls">
+                <button class="clear-history-btn" onclick="clearHistory(event)">Clear</button>
+                <button class="close-sidebar-btn" onclick="toggleHistory()">✕</button>
+            </div>
+        </div>
+        <div class="history-content">
+            <div id="history-list" class="history-list">
+                <p class="no-history">No rolls yet. Start rolling to see your history!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay for mobile -->
+    <div id="history-overlay" class="history-overlay" onclick="toggleHistory()"></div>
 
     <script src="script.js"></script>
 </body>
