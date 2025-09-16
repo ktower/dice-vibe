@@ -10,9 +10,12 @@ A beautiful, interactive dice rolling application built with vanilla HTML, CSS, 
 - **Multiple Dice Types**: Support for D2, D4, D6, D8, D10, D12, D20, and D100
 - **Arbitrary Quantities**: Roll up to 50 dice of each type simultaneously
 - **Visual Dice Display**: Each die result is shown as an animated visual element
-- **Smart Totals**: Individual totals per dice type plus grand total across all rolls
+- **Smart Totals**: Individual totals per dice type plus optional grand total
+- **Roll History**: Session-based history with detailed roll tracking and re-roll functionality
+- **Sidebar Interface**: Elegant slide-out history panel with mobile-responsive design
+- **Accessibility First**: Full ARIA support, keyboard navigation, and screen reader compatibility
 - **Beautiful UI**: Modern gradient design with glass-morphism effects
-- **Responsive Design**: Works on desktop and mobile devices
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Roll Animations**: Smooth rotation animations when dice are rolled
 - **Containerized**: Ready-to-deploy Docker container
 
@@ -37,14 +40,26 @@ docker run -p 8080:80 dice-roller
 ## 🎮 How to Use
 
 1. **Select Dice**: Enter the number of each dice type you want to roll (0-50)
-2. **Roll**: Click the "🎲 Roll Dice! 🎲" button
-3. **View Results**: See individual die results, subtotals, and grand total
-4. **Roll Again**: Modify quantities and roll again as many times as you want
+2. **Configure Options**: Toggle "Show Grand Total" if you want to see combined totals
+3. **Roll**: Click the "🎲 Roll Dice! 🎲" button
+4. **View Results**: See individual die results and totals
+5. **Check History**: Click the 📜 button to view your roll history
+6. **Re-roll Previous**: Use the "🎲 Re-roll" button in history to repeat configurations
+
+### Roll History Features
+- **Session Storage**: Keeps up to 50 recent rolls during your session
+- **Detailed Records**: Timestamp, configuration, individual results, and totals
+- **Quick Re-roll**: One-click to repeat any previous dice configuration
+- **Clear History**: Remove all history with confirmation dialog
+- **Sidebar Interface**: Slide-out panel with smooth animations
+- **Mobile Optimized**: Touch-friendly controls and responsive layout
 
 ### Default Setup
 The application loads with a default configuration:
 - 2 × D6 dice (standard six-sided dice)
 - 1 × D20 die (twenty-sided die)
+- Grand total display enabled
+- History sidebar closed
 
 ## 🏗️ Project Structure
 
@@ -61,9 +76,11 @@ The application loads with a default configuration:
 ## 🛠️ Technical Details
 
 ### Frontend Stack
-- **HTML5**: Semantic structure with accessibility considerations
+- **HTML5**: Semantic structure with comprehensive ARIA support
 - **CSS3**: Modern styling with gradients, animations, and responsive grid
-- **Vanilla JavaScript**: No dependencies, pure ES6+ features
+- **Vanilla JavaScript**: Modern ES6+ features with performance optimizations
+- **Accessibility**: WCAG-compliant with keyboard navigation and screen reader support
+- **Performance**: DOM caching, event delegation, and document fragments
 
 ### Docker Setup
 - **Base Image**: `nginx:alpine` (lightweight web server)
@@ -78,14 +95,24 @@ The application loads with a default configuration:
 ## 🎨 Customization
 
 ### Modifying Dice Types
-Edit the `diceTypes` array in `script.js` to add or remove dice types:
+Edit the `DICE_TYPES` constant in `script.js` to add or remove dice types:
 
 ```javascript
-const diceTypes = [
+const DICE_TYPES = [
     { sides: 2, inputId: 'd2', name: 'D2' },
+    { sides: 4, inputId: 'd4', name: 'D4' },
     // Add custom dice here
     { sides: 30, inputId: 'd30', name: 'D30' }
 ];
+```
+
+Also add corresponding HTML input elements in `dice-roller.html`:
+
+```html
+<div class="dice-type">
+    <label for="d30">D30</label>
+    <input type="number" id="d30" min="0" max="50" value="0">
+</div>
 ```
 
 ### Styling Changes
@@ -95,22 +122,50 @@ All visual styling is contained in `styles.css`. Key customizable elements:
 - Responsive breakpoints
 - Dice visual appearance
 
+### Roll History Configuration
+Adjust history settings in `script.js`:
+
+```javascript
+const MAX_HISTORY_ENTRIES = 50; // Change maximum history size
+```
+
 ### Roll Limits
-Change the maximum number of dice per type by modifying the `max` attribute in the HTML inputs or the validation in JavaScript.
+Change the maximum number of dice per type by modifying:
+- The `max` attribute in HTML inputs
+- The `validateDiceInput()` function in JavaScript
+- Update the `Math.min(50, num)` validation limit
+
+### Grand Total Toggle
+The grand total can be disabled by default by changing the HTML:
+
+```html
+<input type="checkbox" id="show-grand-total"> <!-- Remove 'checked' -->
+```
 
 ## 🔧 Development
 
 ### Local Development
 No build process required! Simply edit the files and refresh your browser.
 
+### Code Architecture
+The application follows modern JavaScript patterns:
+- **Constants**: Centralized configuration in `DICE_TYPES`
+- **DOM Caching**: Elements cached for performance
+- **Event Delegation**: Efficient event handling for dynamic content
+- **Input Validation**: Comprehensive bounds checking
+- **XSS Protection**: HTML escaping for all user content
+- **Accessibility**: ARIA labels and semantic HTML throughout
+
 ### Adding Features
 Common enhancement ideas:
-- Dice roll history
-- Save/load dice configurations
-- Sound effects
-- Different dice themes
-- Statistics tracking
-- Custom dice types
+- ✅ ~~Dice roll history~~ (Complete!)
+- Save/load dice configurations to localStorage
+- Sound effects for dice rolls
+- Different dice themes and colors
+- Statistics tracking and analysis
+- Custom dice types and shapes
+- Export history to CSV/JSON
+- Dice presets for popular games
 
 ## 📦 Deployment Options
 
@@ -153,11 +208,15 @@ docker push your-registry/dice-roller:latest
 ## 🎯 Roadmap
 
 - [ ] Add dice roll sound effects
-- [ ] Implement roll history
+- [x] ~~Implement roll history~~ ✅ **Complete!**
+- [ ] Add persistent storage (localStorage/IndexedDB)
 - [ ] Add dice presets (common RPG configurations)
+- [ ] Implement statistics and analytics
+- [ ] Add export functionality (CSV, JSON)
 - [ ] Create mobile app version
 - [ ] Add multiplayer support
 - [ ] Implement custom dice designer
+- [ ] Add accessibility testing suite
 
 ---
 
